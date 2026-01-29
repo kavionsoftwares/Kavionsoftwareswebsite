@@ -1,136 +1,138 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const Testimonials: React.FC = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  const platforms = [
-    { 
-      name: "CURSOR", 
-      desc: "Intelligent code completion powered by AI - write custom websites faster with context-aware suggestions that understand your entire codebase." 
-    },
-    { 
-      name: "NOTION", 
-      desc: "All-in-one workspace for project planning, client documentation, and collaborative design - organize every aspect of your web development process in one place." 
-    },
-    { 
-      name: "WRITER", 
-      desc: "AI-powered content generation for website copy, blog posts, and marketing materials - create compelling brand narratives that convert visitors into customers." 
-    },
-    { 
-      name: "BASITEN", 
-      desc: "Advanced automation platform for workflow optimization - streamline repetitive tasks and focus on what matters: building exceptional custom websites." 
-    },
-    { 
-      name: "GAMMA", 
-      desc: "Create stunning presentations and pitch decks in minutes - showcase your web design proposals with beautiful, interactive slides that win clients." 
-    },
-    { 
-      name: "ABRIDGE", 
-      desc: "Transform meeting recordings into actionable insights - capture every client requirement and feedback automatically for perfect project execution." 
-    },
-    { 
-      name: "CLAY", 
-      desc: "Intelligent CRM and relationship management - track leads, manage client interactions, and automate outreach to grow your web development business." 
-    },
-    { 
-      name: "MERCO", 
-      desc: "Data-driven market research and competitive analysis - understand your clients' industries deeply to build websites that dominate their competition." 
+const AuthoritySection: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
-  ];
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="py-24 border-y border-white/5 bg-black transition-all duration-700 ease-in-out relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        
-        {/* Frustration Title */}
-        <div className="text-center mb-20 px-4 max-w-7xl mx-auto relative z-20">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-[calc(-0.05em)] text-white mb-6 leading-[0.85] uppercase transition-all duration-500">
-            ARE YOU READY <br className="hidden md:block" /> TO KEEP UP? <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#19E76E] via-[#10b981] to-[#19E76E] animate-pulse">
-              AUTOMATION ACHIEVES 10X MORE!
-            </span>
-          </h2>
-          <div className="w-24 h-1 bg-[#19E76E] mx-auto mt-8 opacity-50" />
-        </div>
+    <section 
+      ref={sectionRef}
+      className="py-32 bg-black border-y border-white/5 relative overflow-hidden"
+    >
+      {/* Background Pattern Interrupt - Stronger Gradients */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_50%,_#19E76E22_0%,_transparent_50%)]" />
+        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_50%,_#19E76E11_0%,_transparent_50%)]" />
+      </div>
 
-        {/* Interactive Platform Section */}
-        <div 
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className={`relative p-8 md:p-16 lg:p-24 border border-white/10 transition-all duration-700 ease-in-out group cursor-default overflow-hidden
-            ${isHovered ? 'bg-[#19E76E] shadow-[0_0_80px_rgba(25,231,110,0.3)]' : 'bg-[#030303]'}
-          `}
-        >
-          {/* Header Area with The Standard For Innovators inside a Black Box on hover */}
-          <div className="text-center mb-24 relative z-10 flex flex-col items-center">
-            <div className={`transition-all duration-500 transform px-10 py-5 border border-transparent
-              ${isHovered ? 'bg-black text-[#19E76E] border-[#19E76E]/40 shadow-2xl translate-y-0 scale-105' : 'bg-transparent text-white/30 translate-y-0'}
-            `}>
-              <span className="font-mono text-[11px] md:text-[14px] uppercase tracking-[0.6em] font-black whitespace-nowrap">
-                The standard for innovators
-              </span>
-            </div>
-          </div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-32">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-12 relative z-10">
-            {platforms.map((platform) => (
-              <div 
-                key={platform.name} 
-                className="flex flex-col transition-all duration-500 group/item"
-              >
-                <h4 className={`font-mono text-3xl font-black tracking-tighter mb-4 transition-colors duration-500
-                  ${isHovered ? 'text-black' : 'text-white/80'}
-                `}>
-                  {platform.name}
-                </h4>
-                <p className={`text-sm leading-relaxed font-medium transition-colors duration-500
-                  ${isHovered ? 'text-black/80' : 'text-white/40'}
-                `}>
-                  {platform.desc}
-                </p>
-                <div className={`mt-6 h-0.5 transition-all duration-500 
-                  ${isHovered ? 'bg-black/30 w-full' : 'bg-white/10 w-8 group-hover/item:w-16'}
-                `} />
-              </div>
-            ))}
-          </div>
+          {/* Left Side: The Narrative & Citation */}
+          <div className="lg:w-1/2 space-y-10 order-2 lg:order-1">
+            <div className="flex items-center gap-4">
+              <div className="h-px w-12 bg-[#19E76E]" />
+              <span className="font-mono text-xs uppercase tracking-[0.4em] text-[#19E76E] font-bold">Authority Protocol</span>
+            </div>
 
-          {/* Call to Action within section */}
-          <div className={`mt-24 text-center transition-all duration-700 delay-100 relative z-10
-            ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-          `}>
-            <a href="#contact" className="inline-block">
-              <button className="bg-black text-[#19E76E] px-12 py-5 font-mono text-xs font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all border-2 border-black group/btn shadow-xl">
-                Scale Your Business →
-              </button>
-            </a>
-          </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white uppercase">
+              Visual <span className="text-white/40">Credibility</span> <br />
+              Is Non-Negotiable.
+            </h2>
 
-          {/* Decorative Grid Accent */}
-          <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-1000 pointer-events-none bg-[radial-gradient(circle_at_center,_#fff_1px,_transparent_1px)] bg-[size:40px_40px]`} />
-        </div>
+            <div className="relative p-8 border border-white/10 bg-white/[0.02] backdrop-blur-md">
+              <div className="absolute top-0 left-0 w-1 h-full bg-[#19E76E]" />
+              <p className="text-xl md:text-2xl text-white/80 leading-snug font-light italic">
+                The importance of web design cannot be overstated, because nearly all initial impressions are based on visual aesthetics, meaning your business's future is determined in milliseconds.
+              </p>
+            </div>
 
-        {/* Existing Testimonial Quote */}
-        <div className="mt-40 max-w-5xl mx-auto border-l border-white/10 pl-12 relative group">
-          <div className="absolute top-0 left-0 w-1 h-12 bg-[#19E76E] transition-all duration-500 group-hover:h-full" />
-          <blockquote className="text-4xl md:text-5xl font-light italic leading-tight text-white/80 group-hover:text-white transition-colors duration-500">
-            "Kavion Softwares helped us hit insane revenue numbers without ever thinking about scaling UI. Their engineering-first design philosophy is literally a game-changer."
-          </blockquote>
-          <div className="mt-10 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#19E76E] to-blue-500" />
-            <div>
-              <p className="font-bold tracking-tight">Isaiah Granet</p>
-              <p className="text-sm font-mono text-white/40 uppercase">CEO @ BLAND AI</p>
+            <div className="flex items-center gap-4 opacity-40">
+              <div className="w-1 h-1 rounded-full bg-white" />
+              <span className="font-mono text-[10px] uppercase tracking-widest font-bold">Source: British Computer Society, 2019</span>
             </div>
           </div>
+
+          {/* Right Side: The Hero Statistic (94%) */}
+          <div className="lg:w-1/2 flex flex-col items-center justify-center order-1 lg:order-2">
+            <div className="relative group cursor-default">
+              {/* Radial Progress Simulation */}
+              <div className="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+                <svg className="absolute inset-0 w-full h-full -rotate-90">
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="48%"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="transparent"
+                    className="text-white/5"
+                  />
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="48%"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="transparent"
+                    strokeDasharray="100 100"
+                    strokeDashoffset={isVisible ? "6" : "100"}
+                    className="text-[#19E76E] transition-all duration-[2000ms] ease-out shadow-[0_0_20px_#19E76E]"
+                    style={{ strokeDasharray: '280%', strokeDashoffset: isVisible ? '17%' : '280%' }}
+                  />
+                </svg>
+
+                <div className="text-center transition-all duration-700 group-hover:scale-105">
+                  <div className={`text-8xl md:text-9xl lg:text-[11rem] font-black text-white leading-none tracking-tighter transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+                    94<span className="text-[#19E76E] animate-pulse-glow">%</span>
+                  </div>
+                  <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.6em] text-white/40 mt-4 font-bold">
+                    Design Impact Factor
+                  </div>
+                </div>
+              </div>
+
+              {/* Hover Glow Effect */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#19E76E]/0 group-hover:bg-[#19E76E]/5 rounded-full blur-3xl transition-all duration-700 pointer-events-none" />
+            </div>
+          </div>
+        </div>
+
+        {/* Closing Action */}
+        <div className="mt-24 text-center">
+          <p className="text-white/30 text-sm font-light mb-8 max-w-2xl mx-auto">
+            If your website feels like an afterthought, you are forfeiting nearly all of your brand’s potential for conversion before the user even reads your first word.
+          </p>
+          <a href="#contact" className="inline-flex items-center gap-4 group">
+             <span className="font-mono text-xs uppercase tracking-[0.3em] font-bold text-white group-hover:text-[#19E76E] transition-colors">Audit Your Presence</span>
+             <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#19E76E] transition-all group-hover:translate-x-1">
+                <svg className="w-4 h-4 text-[#19E76E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+             </div>
+          </a>
         </div>
       </div>
 
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#19E76E]/5 to-transparent pointer-events-none" />
+      <style>{`
+        @keyframes pulse-glow {
+          0%, 100% { filter: drop-shadow(0 0 5px rgba(25, 231, 110, 0.4)); }
+          50% { filter: drop-shadow(0 0 15px rgba(25, 231, 110, 0.8)); }
+        }
+        .animate-pulse-glow {
+          animation: pulse-glow 3s infinite ease-in-out;
+        }
+      `}</style>
     </section>
   );
 };
 
-export default Testimonials;
+export default AuthoritySection;
